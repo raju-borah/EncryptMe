@@ -5,7 +5,6 @@ import static Ciphers.Vernem.*;
 import static Ciphers.Vigenere.*;
 import com.sun.management.OperatingSystemMXBean;
 import java.awt.Color;
-import java.awt.Toolkit;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -35,6 +34,7 @@ public class EncryptMe extends javax.swing.JFrame {
         initComponents();
         OperatingSystemMXBean bean = (com.sun.management.OperatingSystemMXBean) ManagementFactory.getOperatingSystemMXBean();
         bean.getProcessCpuLoad();
+        
     }
     private char table[][] = new char[5][5];
     float vigernecpu, vernemcpu, playfaircpu, hillcpu;
@@ -58,159 +58,158 @@ public class EncryptMe extends javax.swing.JFrame {
     public static float CPUusage() {
         OperatingSystemMXBean bean = (com.sun.management.OperatingSystemMXBean) ManagementFactory.getOperatingSystemMXBean();
         double b = bean.getProcessCpuLoad() * 100;
-        float c = (float)(b);
+        float c = (float) (b);
         System.out.println(c);
         return c;
 //            System.out.println(bean.getSystemCpuLoad());
 
     }
 
+    private static String evenlength(String p) {
+        if (p.length() % 2 != 0) {
+            p = p.concat("x");
+        }
+        return p;
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
         buttonGroup1 = new javax.swing.ButtonGroup();
+        bg = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        enterkey = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jLabel6 = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
+        OptionPanel = new javax.swing.JPanel();
+        Methods = new javax.swing.JPanel();
         playfaircipher = new javax.swing.JRadioButton();
         hillcipher = new javax.swing.JRadioButton();
         viginerecipher = new javax.swing.JRadioButton();
         vernemcipher = new javax.swing.JRadioButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        plaintext = new javax.swing.JTextArea();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        decryptedplaintext = new javax.swing.JTextArea();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        ciphertext = new javax.swing.JTextArea();
-        jButton3 = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
         creategraph = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        jSeparator2 = new javax.swing.JSeparator();
+        jButton6 = new javax.swing.JButton();
+        jSeparator1 = new javax.swing.JSeparator();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        enterkey = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        jButton3 = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        plaintext = new javax.swing.JTextArea();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        ciphertext = new javax.swing.JTextArea();
+        jLabel4 = new javax.swing.JLabel();
+        jButton5 = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        decryptedplaintext = new javax.swing.JTextArea();
+        jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("EncryptMe");
-        setBackground(new java.awt.Color(204, 204, 255));
+        setBackground(new java.awt.Color(51, 51, 0));
+        setName("EncryptMe"); // NOI18N
+        setResizable(false);
+        getContentPane().setLayout(new javax.swing.BoxLayout(getContentPane(), javax.swing.BoxLayout.LINE_AXIS));
+
+        bg.setBackground(new java.awt.Color(0, 153, 153));
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 72)); // NOI18N
-        jLabel1.setText("Encryption");
+        jLabel1.setText("ENCRYPT");
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel2.setText("PlainText");
+        OptionPanel.setBackground(new java.awt.Color(51, 51, 51));
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel3.setText("Key ");
+        Methods.setBackground(new java.awt.Color(51, 51, 51));
+        Methods.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createMatteBorder(4, 4, 4, 4, new java.awt.Color(0, 204, 204)), "Encryption Method", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Tahoma", 1, 24), new java.awt.Color(255, 255, 255))); // NOI18N
+        Methods.setForeground(new java.awt.Color(255, 255, 255));
+        Methods.setLayout(new java.awt.GridBagLayout());
 
-        enterkey.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        enterkey.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                enterkeyActionPerformed(evt);
-            }
-        });
-
-        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel4.setText("CipherText");
-
-        jButton1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jButton1.setText("Encrypt");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
-        jButton2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jButton2.setText("Decrypt");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-
-        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel6.setText("Decrypted PlainText");
-
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Encryption Method", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Tahoma", 1, 24), new java.awt.Color(51, 51, 51))); // NOI18N
-
+        playfaircipher.setBackground(new java.awt.Color(51, 51, 51));
         buttonGroup1.add(playfaircipher);
         playfaircipher.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        playfaircipher.setForeground(new java.awt.Color(255, 255, 255));
         playfaircipher.setText("PlayFair Cipher");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.ipadx = 16;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 69, 0, 67);
+        Methods.add(playfaircipher, gridBagConstraints);
 
+        hillcipher.setBackground(new java.awt.Color(51, 51, 51));
         buttonGroup1.add(hillcipher);
         hillcipher.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        hillcipher.setForeground(new java.awt.Color(255, 255, 255));
         hillcipher.setText("Hill Cipher");
+        hillcipher.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                hillcipherActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.ipadx = 74;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(65, 69, 0, 67);
+        Methods.add(hillcipher, gridBagConstraints);
 
+        viginerecipher.setBackground(new java.awt.Color(51, 51, 51));
         buttonGroup1.add(viginerecipher);
         viginerecipher.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        viginerecipher.setForeground(new java.awt.Color(255, 255, 255));
         viginerecipher.setText("Viginerne Cipher");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 69, 65, 67);
+        Methods.add(viginerecipher, gridBagConstraints);
 
+        vernemcipher.setBackground(new java.awt.Color(51, 51, 51));
         buttonGroup1.add(vernemcipher);
         vernemcipher.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        vernemcipher.setForeground(new java.awt.Color(255, 255, 255));
         vernemcipher.setText("Vernem Cipher");
         vernemcipher.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 vernemcipherActionPerformed(evt);
             }
         });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.ipadx = 20;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 69, 0, 67);
+        Methods.add(vernemcipher, gridBagConstraints);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(61, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(hillcipher, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(viginerecipher)
-                    .addComponent(playfaircipher)
-                    .addComponent(vernemcipher))
-                .addGap(59, 59, 59))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(34, 34, 34)
-                .addComponent(hillcipher)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(playfaircipher)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(vernemcipher)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(viginerecipher)
-                .addContainerGap(57, Short.MAX_VALUE))
-        );
-
-        plaintext.setColumns(20);
-        plaintext.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        plaintext.setRows(5);
-        jScrollPane1.setViewportView(plaintext);
-
-        decryptedplaintext.setEditable(false);
-        decryptedplaintext.setColumns(20);
-        decryptedplaintext.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        decryptedplaintext.setRows(5);
-        jScrollPane2.setViewportView(decryptedplaintext);
-
-        ciphertext.setEditable(false);
-        ciphertext.setColumns(20);
-        ciphertext.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        ciphertext.setRows(5);
-        jScrollPane3.setViewportView(ciphertext);
-
-        jButton3.setText("Choose a File");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        jButton1.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
+        jButton1.setText("Encrypt");
+        jButton1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                jButton1ActionPerformed(evt);
             }
         });
 
-        creategraph.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jButton2.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
+        jButton2.setText("Decrypt");
+        jButton2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        creategraph.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         creategraph.setText("Create Graph");
+        creategraph.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
         creategraph.setEnabled(false);
         creategraph.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -218,95 +217,222 @@ public class EncryptMe extends javax.swing.JFrame {
             }
         });
 
-        jButton4.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jButton4.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         jButton4.setText("Store");
+        jButton4.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
             }
         });
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(446, 446, 446)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(120, 120, 120)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addGap(51, 51, 51)
-                                .addComponent(enterkey, javax.swing.GroupLayout.PREFERRED_SIZE, 507, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel4)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel2)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jButton3))
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 595, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(83, 83, 83)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(120, 120, 120)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 595, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel6)
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 595, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(85, 85, 85)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 355, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(creategraph, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 352, Short.MAX_VALUE)
-                                .addComponent(jButton2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(173, 173, 173))
+        jLabel5.setFont(new java.awt.Font("Times New Roman", 1, 72)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setText("MESSAGE");
+
+        jButton6.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
+        jButton6.setText("Clear All");
+        jButton6.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout OptionPanelLayout = new javax.swing.GroupLayout(OptionPanel);
+        OptionPanel.setLayout(OptionPanelLayout);
+        OptionPanelLayout.setHorizontalGroup(
+            OptionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(OptionPanelLayout.createSequentialGroup()
+                .addGroup(OptionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(OptionPanelLayout.createSequentialGroup()
+                        .addGap(37, 37, 37)
+                        .addGroup(OptionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5)
+                            .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(OptionPanelLayout.createSequentialGroup()
+                        .addGap(98, 98, 98)
+                        .addGroup(OptionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(Methods, javax.swing.GroupLayout.PREFERRED_SIZE, 343, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(creategraph, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap(100, Short.MAX_VALUE))
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(13, 13, 13)
-                .addComponent(jLabel1)
-                .addGap(63, 63, 63)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(enterkey, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(3, 3, 3)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton3))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(27, 27, 27)
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(7, 7, 7)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(creategraph, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(76, 76, 76)
-                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(17, 17, 17)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(45, Short.MAX_VALUE))
+        OptionPanelLayout.setVerticalGroup(
+            OptionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, OptionPanelLayout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(Methods, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(creategraph, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        setSize(new java.awt.Dimension(1252, 903));
+        jSeparator1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+
+        jPanel1.setBackground(new java.awt.Color(0, 153, 153));
+        jPanel1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(51, 51, 51), 2, true));
+        jPanel1.setForeground(new java.awt.Color(51, 51, 51));
+        jPanel1.setToolTipText("");
+
+        jLabel3.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
+        jLabel3.setText("Key ");
+
+        enterkey.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
+        enterkey.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 204, 204), 1, true));
+        enterkey.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                enterkeyActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
+        jLabel2.setText("PlainText");
+
+        jButton3.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jButton3.setText("Choose a File");
+        jButton3.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
+        plaintext.setColumns(20);
+        plaintext.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
+        plaintext.setRows(5);
+        plaintext.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 204, 204), 1, true));
+        jScrollPane1.setViewportView(plaintext);
+
+        ciphertext.setEditable(false);
+        ciphertext.setColumns(20);
+        ciphertext.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
+        ciphertext.setRows(5);
+        ciphertext.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 204, 204), 1, true));
+        jScrollPane3.setViewportView(ciphertext);
+
+        jLabel4.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
+        jLabel4.setText("CipherText");
+
+        jButton5.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jButton5.setText("Choose a File");
+        jButton5.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+
+        decryptedplaintext.setEditable(false);
+        decryptedplaintext.setColumns(20);
+        decryptedplaintext.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
+        decryptedplaintext.setRows(5);
+        decryptedplaintext.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 204, 204), 1, true));
+        jScrollPane2.setViewportView(decryptedplaintext);
+
+        jLabel6.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
+        jLabel6.setText("Decrypted PlainText");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(31, 31, 31)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(jLabel2)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 580, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(jLabel4)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 580, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jScrollPane2)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                            .addComponent(jLabel6)
+                            .addGap(367, 367, 367)))
+                    .addComponent(enterkey, javax.swing.GroupLayout.PREFERRED_SIZE, 580, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addContainerGap(31, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(enterkey, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout bgLayout = new javax.swing.GroupLayout(bg);
+        bg.setLayout(bgLayout);
+        bgLayout.setHorizontalGroup(
+            bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(bgLayout.createSequentialGroup()
+                .addContainerGap(80, Short.MAX_VALUE)
+                .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, bgLayout.createSequentialGroup()
+                        .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(36, 36, 36))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, bgLayout.createSequentialGroup()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
+                .addComponent(OptionPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        bgLayout.setVerticalGroup(
+            bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(bgLayout.createSequentialGroup()
+                .addGap(29, 29, 29)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(OptionPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        getContentPane().add(bg);
+
+        setSize(new java.awt.Dimension(1297, 969));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -339,9 +465,7 @@ public class EncryptMe extends javax.swing.JFrame {
 
             playfairmemory = memoryUsage();
             //check if plaintext length is odd
-            if (plain.length() % 2 != 0) {
-                plain = plain.concat("x");
-            }
+            plain = evenlength(plain);
             //generating key and table matrix
             key = playfairkeyGenerate(key);
 
@@ -354,9 +478,9 @@ public class EncryptMe extends javax.swing.JFrame {
             playfaircpu = CPUusage();
 
         } else if (hillcipher.isSelected()) {
-            if (plain.length() % 2 != 0) {
-                plain = plain.concat("x");
-            }
+           
+            plain = evenlength(plain);
+
             int hill_key[][] = new int[2][2];
             if (!isKeySquare(key.length())) {
                 JOptionPane.showMessageDialog(null, "Enter a perfect Square letters word,\nEnter Key Again");
@@ -365,11 +489,9 @@ public class EncryptMe extends javax.swing.JFrame {
                 hill_key = hillKeyGeneration(key);
                 int determinant = hill_key[0][0] * hill_key[1][1] - hill_key[0][1] * hill_key[1][0];
 
-                if (determinant == 0) {
-//                hill_key = hillKeyGeneration(key);
-//                determinant = hill_key[0][0] * hill_key[1][1] - hill_key[0][1] * hill_key[1][0];
+                if (determinant <= 0) {
                     JOptionPane.showMessageDialog(null, "Not a Valid Key ");
-                    JOptionPane.showInputDialog("Enter Key Again");
+                    JOptionPane.showMessageDialog(null, "Enter Key Again");
                 } else {
                     cipher = hillEncryption(hill_key, plain);
                     hillmemory = memoryUsage();
@@ -383,7 +505,7 @@ public class EncryptMe extends javax.swing.JFrame {
         }
 
         ciphertext.setText(cipher);
-        if (vigernecpu >0 && vernemcpu > 0 && playfaircpu >0 && hillcpu >0) {
+        if (vigernecpu > 0 && vernemcpu > 0 && playfaircpu > 0 && hillcpu > 0) {
             creategraph.setEnabled(true);
 
         }
@@ -403,7 +525,6 @@ public class EncryptMe extends javax.swing.JFrame {
             key = vigenerekeyGenerate(key, cipher.length());
             plain = vigenereDecrpytion(cipher, key);
         } else if (vernemcipher.isSelected()) {
-            key = vigenerekeyGenerate(key, cipher.length());
             plain = vernemDecrpytion(cipher, key);
         } else if (playfaircipher.isSelected()) {
 
@@ -428,42 +549,6 @@ public class EncryptMe extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_vernemcipherActionPerformed
 
-    private void enterkeyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enterkeyActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_enterkeyActionPerformed
-
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // Using this process to invoke the contructor,
-
-        JFileChooser ch = new JFileChooser();
-        ch.showOpenDialog(null);
-        File f = ch.getSelectedFile();
-        String filename = f.getAbsolutePath();
-        FileReader reader;
-        try {
-            reader = new FileReader(filename);
-            BufferedReader br = new BufferedReader(reader);
-            plaintext.read(br, null);
-            br.close();
-            plaintext.requestFocus();
-
-        } catch (FileNotFoundException e) {
-            try {
-                File myFile = new File(filename);
-                if (myFile.createNewFile()) {
-                    System.out.println("File created" + myFile.getName());
-                } else {
-                    System.out.println("File not created");
-                }
-            } catch (IOException ex) {
-                JOptionPane.showMessageDialog(null, ex);
-            }
-        } catch (IOException ex) {
-            JOptionPane.showMessageDialog(null, ex);
-        }
-
-    }//GEN-LAST:event_jButton3ActionPerformed
-
     private void creategraphActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_creategraphActionPerformed
         DefaultCategoryDataset data = new DefaultCategoryDataset();
 
@@ -479,15 +564,14 @@ public class EncryptMe extends javax.swing.JFrame {
 
 //        data.addValue(memoryMax / (double) (1024 * 1024), "Memory", "Tota Memory");
         // create a chart... 
-        JFreeChart jchart = ChartFactory.createBarChart3D("Memory And CPU Consumtion", "Time", "Scale", data, PlotOrientation.VERTICAL, true, true, false);
+        JFreeChart jchart = ChartFactory.createBarChart3D("Memory And CPU Consumtion", "Ciphers", "Scale", data, PlotOrientation.VERTICAL, true, true, false);
         // create and display a frame...
         CategoryPlot plot = jchart.getCategoryPlot();
         plot.setRangeGridlinePaint(Color.black);
 
         ChartFrame frame = new ChartFrame("Performance", jchart);
         frame.pack();
-        frame.setSize(Toolkit.getDefaultToolkit().getScreenSize());
-        frame.setSize(500,500);
+        frame.setLocationRelativeTo(null);
         frame.setVisible(true);
 
 
@@ -495,18 +579,107 @@ public class EncryptMe extends javax.swing.JFrame {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
 
-        String file = JOptionPane.showInputDialog("Enter filename");
-        try {
-            FileWriter fr = new FileWriter(file + ".txt");
-            fr.write(ciphertext.getText());
-            fr.close();
-            JOptionPane.showMessageDialog(null, "Data Inserted To file");
-        } catch (IOException e) {
-            JOptionPane.showMessageDialog(null, "Data Not Inserted To file");
+        String plainfile = JOptionPane.showInputDialog("Enter filename for PlainText:");
+        String cipherfile = JOptionPane.showInputDialog("Enter filename for CipherText:");
+
+        if (JOptionPane.OK_CANCEL_OPTION == 2) {
+            try {
+
+                if (plainfile.isEmpty() | cipherfile.isEmpty() | plainfile.equals(cipherfile)) {
+                    JOptionPane.showMessageDialog(null, "File not created.\nGiven filename for plaintext and ciphertext are same\nOR\nfilename not given");
+                } else {
+                    FileWriter fr = new FileWriter(plainfile + ".txt");
+                    fr.write(plaintext.getText());
+                    fr.close();
+
+                    fr = new FileWriter(cipherfile + ".txt");
+                    fr.write(ciphertext.getText());
+                    fr.close();
+                    JOptionPane.showMessageDialog(null, "File created");
+                }
+            } catch (IOException e) {
+                JOptionPane.showMessageDialog(null, "Data Not Inserted To file");
+
+            }
+        } else {
 
         }
 
+
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // Using this process to invoke the contructor,
+
+        JFileChooser ch = new JFileChooser();
+        ch.showOpenDialog(null);
+        File f = ch.getSelectedFile();
+        String filename = f.getAbsolutePath();
+        FileReader reader;
+        try {
+            reader = new FileReader(filename);
+            BufferedReader br = new BufferedReader(reader);
+            plaintext.read(br, null);
+            br.close();
+
+        } catch (FileNotFoundException e) {
+            try {
+                File myFile = new File(filename);
+                if (myFile.createNewFile()) {
+                    System.out.println("File created" + myFile.getName());
+                } else {
+                    System.out.println("File not created");
+                }
+            } catch (IOException ex) {
+                JOptionPane.showMessageDialog(null, ex);
+            }
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(null, ex);
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void enterkeyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enterkeyActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_enterkeyActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+
+        JFileChooser ch = new JFileChooser();
+        ch.showOpenDialog(null);
+        File f = ch.getSelectedFile();
+        String filename = f.getAbsolutePath();
+        FileReader reader;
+        try {
+            ciphertext.setEditable(true);
+            reader = new FileReader(filename);
+            BufferedReader br = new BufferedReader(reader);
+            ciphertext.read(br, null);
+            br.close();
+
+        } catch (FileNotFoundException e) {
+            ciphertext.setEditable(false);
+            JOptionPane.showMessageDialog(null, "File Not Found");
+        } catch (NullPointerException | IOException ex) {
+            JOptionPane.showMessageDialog(null, ex);
+            ciphertext.setEditable(false);
+        }
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        enterkey.setText("");
+        plaintext.setText("");
+        ciphertext.setText("");
+        decryptedplaintext.setText("");
+        buttonGroup1.clearSelection();
+
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void hillcipherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hillcipherActionPerformed
+        // TODO add your handling code here:
+          if(hillcipher.isSelected()){
+             JOptionPane.showMessageDialog(null, "Enter a 2x2 matrix key");
+        }
+    }//GEN-LAST:event_hillcipherActionPerformed
 
     /**
      * @param args the command line arguments
@@ -540,12 +713,17 @@ public class EncryptMe extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new EncryptMe().setVisible(true);
+                
             }
         });
+       
 
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel Methods;
+    private javax.swing.JPanel OptionPanel;
+    private javax.swing.JPanel bg;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JTextArea ciphertext;
     private javax.swing.JButton creategraph;
@@ -556,15 +734,20 @@ public class EncryptMe extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
     private javax.swing.JTextArea plaintext;
     private javax.swing.JRadioButton playfaircipher;
     private javax.swing.JRadioButton vernemcipher;
