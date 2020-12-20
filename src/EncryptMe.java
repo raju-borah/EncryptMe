@@ -1,8 +1,4 @@
 
-import static Ciphers.Hill.*;
-import static Ciphers.Playfair.*;
-import static Ciphers.Vernem.*;
-import static Ciphers.Vigenere.*;
 import com.sun.management.OperatingSystemMXBean;
 import java.awt.Color;
 import java.io.BufferedReader;
@@ -21,9 +17,15 @@ import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
 
+// custom package 'Ciphers' is created for the ciphers and classes are imported
+import static Ciphers.Hill.*;
+import static Ciphers.Playfair.*;
+import static Ciphers.Vernem.*;
+import static Ciphers.Vigenere.*;
+
 /**
  *
- * @author Raju
+ * @author Raju CS16MSIIT020
  */
 public class EncryptMe extends javax.swing.JFrame {
 
@@ -34,42 +36,44 @@ public class EncryptMe extends javax.swing.JFrame {
         initComponents();
         OperatingSystemMXBean bean = (com.sun.management.OperatingSystemMXBean) ManagementFactory.getOperatingSystemMXBean();
         bean.getProcessCpuLoad();
-        
     }
-    private char table[][] = new char[5][5];
     float vigernecpu, vernemcpu, playfaircpu, hillcpu;
-    float vigernememory, vernemmemory, playfairmemory, hillmemory;
+    double vigernememory, vernemmemory, playfairmemory, hillmemory;
 
     /*memory usage*/
-    public static float memoryUsage() {
+    public static double memoryUsage() {
 
         Runtime runtime = Runtime.getRuntime();
         runtime.gc();
 
         long memoryUsed = runtime.totalMemory() - runtime.freeMemory();
-        double memoryUsedMB = (memoryUsed * 0.000001);
+        double memoryUsedMB = (memoryUsed * .0000009);
 //        System.out.println("total memory: " + memoryMax / (double) (1024L * 1024L) + " MB");
-        float a = (float) (memoryUsedMB);
-        System.out.println("memoryUsed: " + a + " MB");
+        System.out.println("memoryUsed: " + memoryUsedMB + " MB");
 
-        return a;
+        return memoryUsedMB;
     }
 
+    /*CPU Usages*/
     public static float CPUusage() {
         OperatingSystemMXBean bean = (com.sun.management.OperatingSystemMXBean) ManagementFactory.getOperatingSystemMXBean();
         double b = bean.getProcessCpuLoad() * 100;
         float c = (float) (b);
         System.out.println(c);
         return c;
-//            System.out.println(bean.getSystemCpuLoad());
-
     }
 
+    /*checking plaintext length is even or not*/
     private static String evenlength(String p) {
         if (p.length() % 2 != 0) {
             p = p.concat("x");
         }
         return p;
+    }
+
+    /*checking text have special characters and numbers*/
+    private boolean isAlphabates(String plain) {
+        return plain != null && plain.matches("[a-zA-Z]*");
     }
 
     @SuppressWarnings("unchecked")
@@ -93,6 +97,7 @@ public class EncryptMe extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
         jButton6 = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jPanel1 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
@@ -124,7 +129,7 @@ public class EncryptMe extends javax.swing.JFrame {
         OptionPanel.setBackground(new java.awt.Color(51, 51, 51));
 
         Methods.setBackground(new java.awt.Color(51, 51, 51));
-        Methods.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createMatteBorder(4, 4, 4, 4, new java.awt.Color(0, 204, 204)), "Encryption Method", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Tahoma", 1, 24), new java.awt.Color(255, 255, 255))); // NOI18N
+        Methods.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createMatteBorder(4, 4, 4, 4, new java.awt.Color(0, 204, 204)), "Ciphers", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Tahoma", 1, 24), new java.awt.Color(255, 255, 255))); // NOI18N
         Methods.setForeground(new java.awt.Color(255, 255, 255));
         Methods.setLayout(new java.awt.GridBagLayout());
 
@@ -239,6 +244,11 @@ public class EncryptMe extends javax.swing.JFrame {
             }
         });
 
+        jLabel7.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(0, 153, 153));
+        jLabel7.setText("Developed by: Raju");
+        jLabel7.setToolTipText("Developed by: Raju");
+
         javax.swing.GroupLayout OptionPanelLayout = new javax.swing.GroupLayout(OptionPanel);
         OptionPanel.setLayout(OptionPanelLayout);
         OptionPanelLayout.setHorizontalGroup(
@@ -252,13 +262,15 @@ public class EncryptMe extends javax.swing.JFrame {
                             .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(OptionPanelLayout.createSequentialGroup()
                         .addGap(98, 98, 98)
-                        .addGroup(OptionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(Methods, javax.swing.GroupLayout.PREFERRED_SIZE, 343, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(creategraph, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGroup(OptionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel7)
+                            .addGroup(OptionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(Methods, javax.swing.GroupLayout.PREFERRED_SIZE, 343, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(creategraph, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                 .addContainerGap(100, Short.MAX_VALUE))
         );
         OptionPanelLayout.setVerticalGroup(
@@ -280,6 +292,8 @@ public class EncryptMe extends javax.swing.JFrame {
                 .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel7)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -444,71 +458,97 @@ public class EncryptMe extends javax.swing.JFrame {
         key = key.toLowerCase();
         plain = plain.replaceAll("\\s", "");
         plain = plain.toLowerCase();
-        if (viginerecipher.isSelected()) {
-            key = vigenerekeyGenerate(key, plain.length());
-            cipher = vigenereEncrpytion(plain, key);
-            vigernememory = memoryUsage();
-            vigernecpu = CPUusage();
 
-        } else if (vernemcipher.isSelected()) {
+        if (plain.isEmpty() || key.isEmpty()) {
+            //checking key or plaintext is empty or not
+            JOptionPane.showMessageDialog(null, "Key or Plaintext cannot be Empty");
+        } else if (isAlphabates(plain) && isAlphabates(key)) {
 
-            if (key.length() != plain.length()) {
-                JOptionPane.showMessageDialog(null, "Length of key must be Equal to plaintext length,\nEnter Key Again");
+            if (viginerecipher.isSelected()) {
+                //generating key
+                key = vigenerekeyGenerate(key, plain.length());
 
-            } else {
-                cipher = vernemEncrpytion(plain, key);
-                vernemmemory = memoryUsage();
-                vernemcpu = CPUusage();
-            }
+                //Encrypting the plaintext
+                cipher = vigenereEncrpytion(plain, key);
 
-        } else if (playfaircipher.isSelected()) {
+                //calling the memoryUsage and CPUusage 
+                vigernememory = memoryUsage();
+                vigernecpu = CPUusage();
 
-            playfairmemory = memoryUsage();
-            //check if plaintext length is odd
-            plain = evenlength(plain);
-            //generating key and table matrix
-            key = playfairkeyGenerate(key);
+            } else if (vernemcipher.isSelected()) {
 
-            String table_elements = table(key);
-            table = matrix(table_elements);
-
-            //encryption
-            cipher = playfairEncryption(plain, table);
-
-            playfaircpu = CPUusage();
-
-        } else if (hillcipher.isSelected()) {
-           
-            plain = evenlength(plain);
-
-            int hill_key[][] = new int[2][2];
-            if (!isKeySquare(key.length())) {
-                JOptionPane.showMessageDialog(null, "Enter a perfect Square letters word,\nEnter Key Again");
-
-            } else {
-                hill_key = hillKeyGeneration(key);
-                int determinant = hill_key[0][0] * hill_key[1][1] - hill_key[0][1] * hill_key[1][0];
-
-                if (determinant <= 0) {
-                    JOptionPane.showMessageDialog(null, "Not a Valid Key ");
-                    JOptionPane.showMessageDialog(null, "Enter Key Again");
+                if (key.length() != plain.length()) {
+                    //checking plaintext and key length are same or not
+                    JOptionPane.showMessageDialog(null, "Length of key must be Equal to plaintext length,\nEnter Key Again");
                 } else {
-                    cipher = hillEncryption(hill_key, plain);
-                    hillmemory = memoryUsage();
-                    hillcpu = CPUusage();
+                    //encrypting the plaintext
+                    cipher = vernemEncrpytion(plain, key);
+
+                    //calling the function for the memory and cpu usage
+                    vernemmemory = memoryUsage();
+                    vernemcpu = CPUusage();
                 }
 
+            } else if (playfaircipher.isSelected()) {
+                //creating array 
+                char table[][] = new char[5][5];
+                //check if plaintext length is odd
+                plain = evenlength(plain);
+
+                //generating key and table matrix
+                key = playfairkeyGenerate(key);
+                String table_elements = table(key);
+                table = matrix(table_elements);
+
+                //encryption
+                cipher = playfairEncryption(plain, table);
+
+                //calling the function for the memory and cpu usage                
+                playfairmemory = memoryUsage();
+                playfaircpu = CPUusage();
+
+            } else if (hillcipher.isSelected()) {
+                //checking plaintext length is even or not
+                plain = evenlength(plain);
+
+                int hill_key[][] = new int[2][2];
+
+                //checking the key is 2by2 matrix or not
+                if (!isKeySquare(key.length())) {
+                    JOptionPane.showMessageDialog(null, "Enter a 2 X 2 matrix key,\nEnter Key Again");
+
+                } else {
+                    //key generation and determinat evaluation
+                    hill_key = hillKeyGeneration(key);
+                    int determinant = hill_key[0][0] * hill_key[1][1] - hill_key[0][1] * hill_key[1][0];
+
+                    if (determinant <= 0) {
+                        JOptionPane.showMessageDialog(null, "Not a Valid Key ");
+                        JOptionPane.showMessageDialog(null, "Enter Key Again");
+                    } else {
+                        //encryption
+                        cipher = hillEncryption(hill_key, plain);
+                        //cpu and memory usage
+                        hillmemory = memoryUsage();
+                        hillcpu = CPUusage();
+                    }
+
+                }
+
+            } else {
+                JOptionPane.showMessageDialog(null, "Please select a Encryption Method");
             }
 
+            ciphertext.setText(cipher);
+            //if all the variable are assigned with value then the CREATE GRAPGH button will be enabled
+            if (vigernememory > 0 && vernemmemory > 0 && playfairmemory > 0 && hillmemory > 0) {
+                creategraph.setEnabled(true);
+
+            }
         } else {
-            JOptionPane.showMessageDialog(null, "Please select a Encryption Method");
+            JOptionPane.showMessageDialog(null, "Please Enter Key And Plaintext \nwithout special char and numbers");
         }
 
-        ciphertext.setText(cipher);
-        if (vigernecpu > 0 && vernemcpu > 0 && playfaircpu > 0 && hillcpu > 0) {
-            creategraph.setEnabled(true);
-
-        }
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -517,32 +557,75 @@ public class EncryptMe extends javax.swing.JFrame {
         String cipher = ciphertext.getText();
         String key = enterkey.getText();
         String plain = "";
-
         key = key.toLowerCase();
-        plain = cipher.toLowerCase();
+        cipher = cipher.toLowerCase();
+        cipher = cipher.replaceAll("\\s", "");
 
-        if (viginerecipher.isSelected()) {
-            key = vigenerekeyGenerate(key, cipher.length());
-            plain = vigenereDecrpytion(cipher, key);
-        } else if (vernemcipher.isSelected()) {
-            plain = vernemDecrpytion(cipher, key);
-        } else if (playfaircipher.isSelected()) {
+        if (cipher.isEmpty() && key.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Key or ciphertext cannot be Empty");
+        } else if (cipher.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Ciphertext Field cannot be Empty,\nPlease select a file");
+        } else if (isAlphabates(cipher) && isAlphabates(key)) {
 
-            //decryption
-            plain = playfairDecryption(cipher, table);
+            if (viginerecipher.isSelected()) {
+                //generating key and decryption
+                key = vigenerekeyGenerate(key, cipher.length());
+                plain = vigenereDecrpytion(cipher, key);
+                vigernememory = memoryUsage();
+                vigernecpu = CPUusage();
+            } else if (vernemcipher.isSelected()) {
+                if (key.length() != cipher.length()) {
+                    JOptionPane.showMessageDialog(null, "Length of key must be Equal to ciphertext length,\nEnter Key Again");
 
-        } else if (hillcipher.isSelected()) {
-            int hill_key[][] = new int[2][2];
+                } else {
+                    //decryption
+                    plain = vernemDecrpytion(cipher, key);
+                    vernemmemory = memoryUsage();
+                    vernemcpu = CPUusage();
+                }
 
-            hill_key = hillKeyGeneration(key);
-            int determinant = hill_key[0][0] * hill_key[1][1] - hill_key[0][1] * hill_key[1][0];
-            hill_key = adjacentHillKey(hill_key);
-            plain = hillDecryption(hill_key, cipher, determinant);
+            } else if (playfaircipher.isSelected()) {
+                char table[][] = new char[5][5];
+                //generating key and table matrix
+                key = playfairkeyGenerate(key);
+                String table_elements = table(key);
+                table = matrix(table_elements);
+
+                //decryption and cpu memory usage
+                plain = playfairDecryption(cipher, table);
+                playfairmemory = memoryUsage();
+                playfaircpu = CPUusage();
+
+            } else if (hillcipher.isSelected()) {
+                int hill_key[][] = new int[2][2];
+                if (!isKeySquare(key.length())) {
+                    JOptionPane.showMessageDialog(null, "Enter a 2 X 2 matrix key,\nEnter Key Again");
+
+                } else {
+                    hill_key = hillKeyGeneration(key);
+                    int determinant = hill_key[0][0] * hill_key[1][1] - hill_key[0][1] * hill_key[1][0];
+
+                    if (determinant <= 0) {
+                        JOptionPane.showMessageDialog(null, "Not a Valid Key ");
+                        JOptionPane.showMessageDialog(null, "Enter Key Again");
+                    } else {
+                        //generating inverse key and decryption
+                        hill_key = adjacentHillKey(hill_key);
+                        plain = hillDecryption(hill_key, cipher, determinant);
+                        hillmemory = memoryUsage();
+                        hillcpu = CPUusage();
+                    }
+
+                }
+
+            } else {
+                JOptionPane.showMessageDialog(null, "Please select a Decryption Method");
+            }
+
+            decryptedplaintext.setText(plain);
         } else {
-            JOptionPane.showMessageDialog(null, "Please select a Encryption Method");
+            JOptionPane.showMessageDialog(null, "Please Enter Key and ciphertext \nwithout special char and numbers");
         }
-
-        decryptedplaintext.setText(plain);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void vernemcipherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vernemcipherActionPerformed
@@ -550,6 +633,7 @@ public class EncryptMe extends javax.swing.JFrame {
     }//GEN-LAST:event_vernemcipherActionPerformed
 
     private void creategraphActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_creategraphActionPerformed
+        //creating dataset for the graph
         DefaultCategoryDataset data = new DefaultCategoryDataset();
 
         data.addValue(vigernecpu, "CPU Usage", "vigerne Cipher");
@@ -557,21 +641,21 @@ public class EncryptMe extends javax.swing.JFrame {
         data.addValue(playfaircpu, "CPU Usage", "playfair Cipher");
         data.addValue(hillcpu, "CPU Usage", "hill Cipher");
 
-        data.addValue(vernemmemory, "Memory Usage", "vernem Cipher");
         data.addValue(vigernememory, "Memory Usage", "vigerne Cipher");
+        data.addValue(vernemmemory, "Memory Usage", "vernem Cipher");
         data.addValue(playfairmemory, "Memory Usage", "playfair Cipher");
         data.addValue(hillmemory, "Memory Usage", "hill Cipher");
 
-//        data.addValue(memoryMax / (double) (1024 * 1024), "Memory", "Tota Memory");
         // create a chart... 
-        JFreeChart jchart = ChartFactory.createBarChart3D("Memory And CPU Consumtion", "Ciphers", "Scale", data, PlotOrientation.VERTICAL, true, true, false);
-        // create and display a frame...
+        JFreeChart jchart = ChartFactory.createBarChart3D("Memory And CPU Consumtion", "Ciphers", "Scale (CPU in percentage) & (Memory in MB)", data, PlotOrientation.VERTICAL, true, true, false);
+        // create and display a frame
         CategoryPlot plot = jchart.getCategoryPlot();
         plot.setRangeGridlinePaint(Color.black);
-
+        
         ChartFrame frame = new ChartFrame("Performance", jchart);
         frame.pack();
         frame.setLocationRelativeTo(null);
+        frame.setSize(900, 700);
         frame.setVisible(true);
 
 
@@ -610,31 +694,22 @@ public class EncryptMe extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // Using this process to invoke the contructor,
-
-        JFileChooser ch = new JFileChooser();
-        ch.showOpenDialog(null);
-        File f = ch.getSelectedFile();
-        String filename = f.getAbsolutePath();
-        FileReader reader;
         try {
+            JFileChooser ch = new JFileChooser();
+            ch.showOpenDialog(null);
+            File f = ch.getSelectedFile();
+            String filename = f.getAbsolutePath();
+            FileReader reader;
+
             reader = new FileReader(filename);
             BufferedReader br = new BufferedReader(reader);
             plaintext.read(br, null);
             br.close();
 
-        } catch (FileNotFoundException e) {
-            try {
-                File myFile = new File(filename);
-                if (myFile.createNewFile()) {
-                    System.out.println("File created" + myFile.getName());
-                } else {
-                    System.out.println("File not created");
-                }
-            } catch (IOException ex) {
-                JOptionPane.showMessageDialog(null, ex);
-            }
         } catch (IOException ex) {
-            JOptionPane.showMessageDialog(null, ex);
+            JOptionPane.showMessageDialog(null, "File Not Found");
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 
@@ -644,15 +719,16 @@ public class EncryptMe extends javax.swing.JFrame {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
 
-        JFileChooser ch = new JFileChooser();
-        ch.showOpenDialog(null);
-        File f = ch.getSelectedFile();
-        String filename = f.getAbsolutePath();
-        FileReader reader;
         try {
+            JFileChooser ch = new JFileChooser();
+            ch.showOpenDialog(null);
+            File f = ch.getSelectedFile();
+            String filename = f.getAbsolutePath();
+            FileReader myreader;
+
             ciphertext.setEditable(true);
-            reader = new FileReader(filename);
-            BufferedReader br = new BufferedReader(reader);
+            myreader = new FileReader(filename);
+            BufferedReader br = new BufferedReader(myreader);
             ciphertext.read(br, null);
             br.close();
 
@@ -660,7 +736,7 @@ public class EncryptMe extends javax.swing.JFrame {
             ciphertext.setEditable(false);
             JOptionPane.showMessageDialog(null, "File Not Found");
         } catch (NullPointerException | IOException ex) {
-            JOptionPane.showMessageDialog(null, ex);
+            System.out.println(ex.getMessage());
             ciphertext.setEditable(false);
         }
     }//GEN-LAST:event_jButton5ActionPerformed
@@ -671,13 +747,15 @@ public class EncryptMe extends javax.swing.JFrame {
         ciphertext.setText("");
         decryptedplaintext.setText("");
         buttonGroup1.clearSelection();
-
+        vigernecpu = vernemcpu = playfaircpu = hillcpu = 0;
+        vigernememory = vernemmemory = playfairmemory = hillmemory = 0;
+        creategraph.setEnabled(false);
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void hillcipherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hillcipherActionPerformed
         // TODO add your handling code here:
-          if(hillcipher.isSelected()){
-             JOptionPane.showMessageDialog(null, "Enter a 2x2 matrix key");
+        if (hillcipher.isSelected()) {
+            JOptionPane.showMessageDialog(null, "Enter a 2x2 matrix key");
         }
     }//GEN-LAST:event_hillcipherActionPerformed
 
@@ -713,10 +791,9 @@ public class EncryptMe extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new EncryptMe().setVisible(true);
-                
+
             }
         });
-       
 
     }
 
@@ -742,6 +819,7 @@ public class EncryptMe extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
@@ -753,4 +831,5 @@ public class EncryptMe extends javax.swing.JFrame {
     private javax.swing.JRadioButton vernemcipher;
     private javax.swing.JRadioButton viginerecipher;
     // End of variables declaration//GEN-END:variables
+
 }
